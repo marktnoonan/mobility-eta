@@ -1,0 +1,14 @@
+{
+  "name": "mobility-eta",
+  "version": "1.0.0",
+  "description": "Basic MARTA Mobility ETA project by Paratransit Pal",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Mark Noonan",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^2.1.0"
+  }
+}
