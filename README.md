@@ -42,7 +42,7 @@ or
 ```
 npx cypress open
 ```
-to open Cypress, then run the test "app_spec.js" which will verify that the homepage loads, test user is able to log in, and the trip information is displayed. Note that the test user data is returned from a real network request to a php script running on markthomasnoona.com, and we might want to mock that result instead.
+to open Cypress, then run the test "app_spec.js" which will verify that the homepage loads, test user is able to log in, and the trip information is displayed. Note that the test user data is returned from a real network request to a php script running on markthomasnoonan.com, and we might want to mock that result instead.
 
 ## Deployment
 
