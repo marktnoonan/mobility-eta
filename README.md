@@ -27,7 +27,10 @@ For devlopment server:
 parcel index.html
 ```
 
-Once build is complete, navigate to "http://localhost:1234/".
+Once build is complete, navigate to "http://localhost:1234/". You should see a login in screen and be able to log in with username and password 'test':
+
+![Mobility ETA Login Process](http://www.giphy.com/gifs/1zRdhwH9CKNjzeHdH0)
+
 
 ## Running the tests
 
