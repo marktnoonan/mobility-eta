@@ -31,9 +31,7 @@ Once build is complete, navigate to "http://localhost:1234/".
 
 ## Running the tests
 
-This project will use [Cypress](https://www.cypress.io/) for E2E testing. 
-
-### Break down into end to end tests
+This project will use [Cypress](https://www.cypress.io/) for E2E testing.
 
 ## Deployment
 
