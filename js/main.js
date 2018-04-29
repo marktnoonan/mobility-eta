@@ -1,3 +1,6 @@
+import helpers from './helpers'
+import busImageURL from '../assets/bus.png'
+
 var etaColors = {
 	yellow: '#d69400',
 	green: '#8AB755',
@@ -17,7 +20,7 @@ var todaysDate = ''
 function showInfo(username, password) {
 	document.querySelector('#intro-text').innerHTML =
 		'<h3 txt="c"> Your Next Trip </h3>'
-	today(username)
+	todaysDate = helpers.today(username)
 	showSpinner()
 	loginDetails = [username, password]
 	getTrips(username, password)
@@ -61,7 +64,11 @@ function addRefreshListener() {
 function getTrips(username, password) {
 	return new Promise(function(resolve, reject) {
 		var xhr = new XMLHttpRequest()
-		xhr.open('POST', 'scrape.php', true)
+		xhr.open(
+			'POST',
+			'https://markthomasnoonan.com/mobility-eta/scrape.php',
+			true
+		)
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 		xhr.onload = function() {
 			if (xhr.readyState == 4 && xhr.status === 200) {
@@ -90,11 +97,13 @@ function handleMartaData(xhrResponse) {
 		status: '',
 		etaInMinutes: '',
 		endWindowInMinutes: '',
-		currentTimeInMinutes: convertTimeToMinutes(getCurrentTime()),
+		currentTimeInMinutes: helpers.convertTimeToMinutes(
+			helpers.getCurrentTime()
+		),
 		displayEta: '',
 		displayReadyTime: '',
 		displayEndWindow: '',
-		displayDate: dateHelper.prettyDate(new Date()),
+		displayDate: helpers.dateHelper.prettyDate(new Date()),
 		pickupAddress: `${pickupLocationData.streetNumber} ${
 			pickupLocationData.onStreet
 		}<br> ${pickupLocationData.city}, ${pickupLocationData.state} ${
@@ -107,13 +116,15 @@ function handleMartaData(xhrResponse) {
 		}`
 	}
 
-	nextTripInfo.etaInMinutes = convertTimeToMinutes(nextTripInfo.eta)
-	nextTripInfo.endWindowInMinutes = convertTimeToMinutes(nextTripInfo.endWindow)
-	nextTripInfo.displayEta = convertFromMilitaryTime(nextTripInfo.eta)
-	nextTripInfo.displayReadyTime = convertFromMilitaryTime(
+	nextTripInfo.etaInMinutes = helpers.convertTimeToMinutes(nextTripInfo.eta)
+	nextTripInfo.endWindowInMinutes = helpers.convertTimeToMinutes(
+		nextTripInfo.endWindow
+	)
+	nextTripInfo.displayEta = helpers.convertFromMilitaryTime(nextTripInfo.eta)
+	nextTripInfo.displayReadyTime = helpers.convertFromMilitaryTime(
 		nextTripInfo.readyTime
 	)
-	nextTripInfo.displayEndWindow = convertFromMilitaryTime(
+	nextTripInfo.displayEndWindow = helpers.convertFromMilitaryTime(
 		nextTripInfo.endWindow
 	)
 	nextTripInfo.delayInMinutes =
@@ -222,7 +233,7 @@ function showTrip(tripDetails) {
 				<div class="outer" style="text-align: left; width: 240px; background-color: #111; border-radius: 10px; overflow: hidden;">
 					<div class="inner" style="height: 26px; background-color: #595; background: linear-gradient(to right, #595 0%, #ee5 50%, #f55 80%);">
 						<span class="eta label" style="position: relative;display: inline-block;box-sizing: border-box;height: 100%;padding-top: 5px;text-align: left;transform: translateY(-5px);" aria-hidden="true">
-              <img src="assets/bus.png" id="martabus" style="height: 26px;padding: 0px 5px 0px 0px; border-left: 108px solid rgba(100, 100, 100, 0.5); border-right: 104px solid rgba(100, 100, 100, 0.5);"
+              <img src="${busImageURL}" id="martabus" style="height: 26px;padding: 0px 5px 0px 0px; border-left: 108px solid rgba(100, 100, 100, 0.5); border-right: 104px solid rgba(100, 100, 100, 0.5);"
                 alt="">
             </span>
 					</div>
