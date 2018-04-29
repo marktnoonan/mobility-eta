@@ -36,7 +36,7 @@
             <a href="#four">Menu item</a>
             </menuitem>
             <menuitem>
-            <a href="#five">Menu item</a>
+            <a href="#five" onclick="location.reload()">Sign Out</a>
             </menuitem>
           </menu>
         </li>
@@ -44,17 +44,25 @@
     </label>
 	</nav>
 	<section mt->
-		<h1>Mobility ETA</h1>
-		<p>Mobility ETA is a quick way to see the expected arrival time of your next MARTA Mobility ride.</p>
+		<div id="intro-text">
+			<h1>Mobility ETA</h1>
+			<p>Mobility ETA is a quick way to see the expected arrival time of your next MARTA Mobility ride.</p>
+
+		</div>
 		<div id="mobility-eta" txt="c">
 			<div class="form-wrapper" style="text-align:center; margin-top: 20px; margin-bottom: 20px;">
 				<hr>
 				<form class="" id="unpw-form" method="post">
 					<h2 style="margin-bottom: 40px;"> Log In </h2>
-					<input type="text" name="providedUsername" value="" placeholder="Client ID" style="font-size:18px; padding: 3px" autofocus>
+					<label>
+						<span>Client ID</span>
+					<input type="text" name="providedUsername" value="" placeholder="12345" autofocus>
+					</label>
 					<br>
-					<br>
-					<input type="password" name="providedPassword" id="pw" value="" placeholder="Password" style="font-size:18px; padding: 3px">
+					<label>
+						<span>Password</span>
+					<input type="password" name="providedPassword" id="pw" value="" placeholder="*****">	
+					</label>
 					<br>
 					<br>
 					<br> </form>
@@ -77,6 +85,7 @@
 		</p>
 
 	</footer>
+	<script src="js/helpers.js"></script>
 	<script src="js/main.js"></script>
 </body>
 
