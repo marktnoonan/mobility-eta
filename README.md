@@ -34,7 +34,15 @@ Once build is complete, navigate to "http://localhost:1234/". You should see a l
 
 ## Running the tests
 
-This project will use [Cypress](https://www.cypress.io/) for E2E testing.
+This project will use [Cypress](https://www.cypress.io/) for E2E testing. Run 
+```
+npm test
+```
+or 
+```
+npx cypress open
+```
+to open Cypress, then run the test "app_spec.js" which will verify that the homepage loads, test user is able to log in, and the trip information is displayed. Note that the test user data is returned from a real network request to a php script running on markthomasnoona.com, and we might want to mock that result instead.
 
 ## Deployment
 
