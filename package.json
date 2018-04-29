@@ -9,7 +9,10 @@
   "author": "Mark Noonan",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "cypress": "^2.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-preset-env": "^1.6.1"
+  }
 }

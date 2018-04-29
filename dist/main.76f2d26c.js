@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({9:[function(require,module,exports) {
+})({4:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -132,9 +132,9 @@ exports.default = {
 		}
 	}
 };
-},{}],20:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 module.exports="/bus.b9fd57c7.png";
-},{}],10:[function(require,module,exports) {
+},{}],5:[function(require,module,exports) {
 'use strict';
 
 var _helpers = require('./helpers');
@@ -342,7 +342,7 @@ function showSpinner() {
 	var spinner = '<style>@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }</style><div id="spinner" style="width: 50px; height: 50px; -webkit-animation: sweep 1s infinite linear; border-radius: 75px; border-bottom: 5px solid #00bbe5; margin: 50px auto"></div><div style="margin: 20px auto; display: inline-block">Loading your trips...</div>';
 	document.querySelector('#mobility-eta').innerHTML = spinner;
 }
-},{"./helpers":9,"../assets/bus.png":20}],21:[function(require,module,exports) {
+},{"./helpers":4,"../assets/bus.png":12}],13:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -372,7 +372,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53973' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54765' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -511,5 +511,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[21,10])
+},{}]},{},[13,5])
 //# sourceMappingURL=/main.76f2d26c.map
