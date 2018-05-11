@@ -2,8 +2,6 @@
 ini_set('display_errors', 0);
  header("Access-Control-Allow-Origin: *");
 // logging in with cURL based on http://thisinterestsme.com/php-login-to-website-with-curl/
-// this returns the DOM of the page it fetched as a string
-// simple HTML DOM turns that string back into a tree that we can traverse with selectors.
 
 date_default_timezone_set('America/New_York');
 // if UN and PW are set, and not equal to "test" or empty strings.
@@ -85,7 +83,7 @@ function martaLogin()
     }
 
   //We should be logged in by now. Let's attempt to access a password protected page
-    curl_setopt($curl, CURLOPT_URL, 'https://martapp.mvtransit.com/Trips/GetCalendarData?year=2018&month=4');
+    curl_setopt($curl, CURLOPT_URL, 'https://martapp.mvtransit.com/Trips/GetCalendarData?year=2018&month='.date("n"));
 
     //Use the same cookie file.
     curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);

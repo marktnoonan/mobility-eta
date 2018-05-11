@@ -1,6 +1,8 @@
 import helpers from './helpers'
 import busImageURL from '../assets/bus.png'
 
+var testing = false
+
 var etaColors = {
 	yellow: '#d69400',
 	green: '#8AB755',
@@ -18,6 +20,7 @@ var todaysDate = ''
 })()
 
 function showInfo(username, password) {
+	testing = username === 'test'
 	document.querySelector('#intro-text').innerHTML =
 		'<h3 txt="c"> Your Next Trip </h3>'
 	todaysDate = helpers.today(username)
@@ -63,37 +66,61 @@ function addRefreshListener() {
 
 function getTrips(username, password) {
 	return new Promise(function(resolve, reject) {
-		var xhr = new XMLHttpRequest()
-		xhr.open(
-			'POST',
-			'https://markthomasnoonan.com/mobility-eta/scrape.php',
-			true
-		)
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-		xhr.onload = function() {
-			if (xhr.readyState == 4 && xhr.status === 200) {
-				resolve(handleMartaData(xhr.responseText))
-			} else {
-				reject(Error('Request failed, status was ' + xhr.statusText))
+		if (testing) {
+			resolve(handleMartaData(helpers.testTrips))
+		} else {
+			var xhr = new XMLHttpRequest()
+			xhr.open(
+				'POST',
+				'https://markthomasnoonan.com/mobility-eta/scrape.php',
+				true
+			)
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+			xhr.onload = function() {
+				if (xhr.readyState == 4 && xhr.status === 200) {
+					resolve(handleMartaData(xhr.responseText))
+				} else {
+					reject(Error('Request failed, status was ' + xhr.statusText))
+				}
 			}
+			xhr.send('providedUsername=' + username + '&providedPassword=' + password)
 		}
-		xhr.send('providedUsername=' + username + '&providedPassword=' + password)
 	})
 }
 
 function handleMartaData(xhrResponse) {
-	var tripDataString = JSON.parse(xhrResponse)
-	var tripDataArray = JSON.parse(tripDataString)
-	var todaysTripData = tripDataArray.find(trip => {
+	console.log(xhrResponse)
+	if (!testing) {
+		var tripDataString = JSON.parse(xhrResponse)
+		var tripDataArray = JSON.parse(tripDataString)
+	} else {
+		var tripDataArray = xhrResponse
+	}
+	var tripToDisplay = tripDataArray.find(trip => {
 		return trip.date === todaysDate
-	}).data.trips[0].trips[0] // need to work on this.
-	const pickupLocationData = todaysTripData.pickup.location
-	const dropoffLocationData = todaysTripData.dropoff.location
+	})
+	if (tripToDisplay) {
+		if (!testing) {
+			tripToDisplay = tripToDisplay.data.trips[0].trips.find(
+				trip => trip.pickup.estimatedTime > helpers.getCurrentTime()
+			)
+		} else {
+			tripToDisplay = tripToDisplay.data.trips[0].trips[0]
+		}
+	} else {
+		tripToDisplay = tripDataArray.find(trip => {
+			return trip.date > todaysDate
+		}).data.trips[0].trips[0]
+		console.log('no trips today')
+	}
+
+	const pickupLocationData = tripToDisplay.pickup.location
+	const dropoffLocationData = tripToDisplay.dropoff.location
 	var nextTripInfo = {
-		bookingID: todaysTripData.id,
-		readyTime: todaysTripData.pickup.negotiatedTimeEarly.substring(0, 5),
-		endWindow: todaysTripData.pickup.negotiatedTimeLate.substring(0, 5),
-		eta: todaysTripData.pickup.estimatedTime.substring(0, 5),
+		bookingID: tripToDisplay.id,
+		readyTime: tripToDisplay.pickup.negotiatedTimeEarly.substring(0, 5),
+		endWindow: tripToDisplay.pickup.negotiatedTimeLate.substring(0, 5),
+		eta: tripToDisplay.pickup.estimatedTime.substring(0, 5),
 		status: '',
 		etaInMinutes: '',
 		endWindowInMinutes: '',
@@ -103,7 +130,7 @@ function handleMartaData(xhrResponse) {
 		displayEta: '',
 		displayReadyTime: '',
 		displayEndWindow: '',
-		displayDate: helpers.dateHelper.prettyDate(new Date()),
+		displayDate: helpers.dateHelper.prettyDate(new Date(tripToDisplay.date)),
 		pickupAddress: `${pickupLocationData.streetNumber} ${
 			pickupLocationData.onStreet
 		}<br> ${pickupLocationData.city}, ${pickupLocationData.state} ${
@@ -195,6 +222,8 @@ function getDelayInMinutesDescription(delay) {
 }
 
 function showTrip(tripDetails) {
+	document.querySelector('section').style.backgroundColor =
+		etaColors[tripDetails.statusColor]
 	return `
     <card full class="booking" id="booking0">
 			<div class="date-and-id" id="date-and-id">

@@ -1,0 +1,222 @@
+[
+	{
+		"date": "2018-05-12",
+		"trips": [
+			{
+				"trips": [
+					{
+						"tripType": 2,
+						"status": {"status": 1, "internalCode": "S"},
+						"creationDate": "2018-05-11T00:00:00-04:00",
+						"fareToCollect": 4.0,
+						"passengerFares": [
+							{
+								"passengerType": {
+									"code": "CLI",
+									"name": "CLIENT",
+									"defaultSpaceType": "AM",
+									"fareTypeId": 1
+								},
+								"spaceTypeCode": "AM",
+								"fare": 4.0
+							}
+						],
+						"pickup": {
+							"estimatedTime": "06:45:00",
+							"actualTime": null,
+							"status": {"status": 1, "internalCode": "S"},
+							"location": {
+								"id": 1,
+								"description": null,
+								"category": null,
+								"name": "",
+								"latitude": 33.80526,
+								"longitude": -84.251832,
+								"streetNumber": "892",
+								"onStreet": "Creekdale Dr",
+								"atStreet": "E Ponce De Leon Ave",
+								"city": "Clarkston",
+								"state": "GA",
+								"postalCode": "30021",
+								"itemType": 1,
+								"internalType": 1,
+								"unit": "",
+								"comments": null,
+								"contact": null
+							},
+							"requestedTimeEarly": null,
+							"requestedTime": "06:45:00",
+							"requestedTimeLate": null,
+							"negotiatedTimeEarly": "06:45:00",
+							"negotiatedTime": "06:45:00",
+							"negotiatedTimeLate": "07:15:00",
+							"scheduledTimeEarly": "06:45:00",
+							"scheduledTime": "06:45:00",
+							"scheduledTimeLate": "07:15:00",
+							"comments": "DO NOT TRANSPORT UNLESS HE HAS FARE!!!",
+							"phone": "4042947027"
+						},
+						"dropoff": {
+							"estimatedTime": "07:01:48",
+							"actualTime": null,
+							"status": {"status": 1, "internalCode": "S"},
+							"location": {
+								"id": 1310,
+								"description": null,
+								"category": null,
+								"name": "Emory Conf Ctr Hotel",
+								"latitude": 33.800113,
+								"longitude": -84.326061,
+								"streetNumber": "1615",
+								"onStreet": "Clifton Rd",
+								"atStreet": "Houston Mill Rd Ne",
+								"city": "Atlanta",
+								"state": "GA",
+								"postalCode": "30329",
+								"itemType": 0,
+								"internalType": 0,
+								"unit": "",
+								"comments": null,
+								"contact": null
+							},
+							"requestedTimeEarly": null,
+							"requestedTime": null,
+							"requestedTimeLate": "07:45:00",
+							"negotiatedTimeEarly": null,
+							"negotiatedTime": null,
+							"negotiatedTimeLate": null,
+							"scheduledTimeEarly": null,
+							"scheduledTime": null,
+							"scheduledTimeLate": null,
+							"comments": "1615 CLIFTON RD",
+							"phone": "4047126000"
+						},
+						"date": "2018-05-12T00:00:00-04:00",
+						"clientID": 5773,
+						"mobilityAidCodes": [],
+						"additionalPassengers": [],
+						"bookingPurposeCode": null,
+						"bookingSubtypeCode": "DEM",
+						"id": 486013,
+						"itineraryID": 0,
+						"callbackPhoneNumber": "404-294-7027",
+						"serviceTypeId": 0,
+						"userDefinedFields": null
+					}
+				],
+				"containsReturnTrip": false,
+				"count": 1
+			}
+		]
+	},
+	{
+		"date": "2018-05-13",
+		"trips": [
+			{
+				"trips": [
+					{
+						"tripType": 2,
+						"status": {"status": 1, "internalCode": "S"},
+						"creationDate": "2018-05-11T00:00:00-04:00",
+						"fareToCollect": 4.0,
+						"passengerFares": [
+							{
+								"passengerType": {
+									"code": "CLI",
+									"name": "CLIENT",
+									"defaultSpaceType": "AM",
+									"fareTypeId": 1
+								},
+								"spaceTypeCode": "AM",
+								"fare": 4.0
+							}
+						],
+						"pickup": {
+							"estimatedTime": "07:22:30",
+							"actualTime": null,
+							"status": {"status": 1, "internalCode": "S"},
+							"location": {
+								"id": 1,
+								"description": null,
+								"category": null,
+								"name": "",
+								"latitude": 33.80526,
+								"longitude": -84.251832,
+								"streetNumber": "892",
+								"onStreet": "Creekdale Dr",
+								"atStreet": "E Ponce De Leon Ave",
+								"city": "Clarkston",
+								"state": "GA",
+								"postalCode": "30021",
+								"itemType": 1,
+								"internalType": 1,
+								"unit": "",
+								"comments": null,
+								"contact": null
+							},
+							"requestedTimeEarly": null,
+							"requestedTime": "06:45:00",
+							"requestedTimeLate": null,
+							"negotiatedTimeEarly": "07:22:30",
+							"negotiatedTime": "07:22:30",
+							"negotiatedTimeLate": "07:52:30",
+							"scheduledTimeEarly": "07:22:30",
+							"scheduledTime": "07:22:30",
+							"scheduledTimeLate": "07:52:30",
+							"comments": "DO NOT TRANSPORT UNLESS HE HAS FARE!!!",
+							"phone": "4042947027"
+						},
+						"dropoff": {
+							"estimatedTime": "07:39:18",
+							"actualTime": null,
+							"status": {"status": 1, "internalCode": "S"},
+							"location": {
+								"id": 1310,
+								"description": null,
+								"category": null,
+								"name": "Emory Conf Ctr Hotel",
+								"latitude": 33.800113,
+								"longitude": -84.326061,
+								"streetNumber": "1615",
+								"onStreet": "Clifton Rd",
+								"atStreet": "Houston Mill Rd Ne",
+								"city": "Atlanta",
+								"state": "GA",
+								"postalCode": "30329",
+								"itemType": 0,
+								"internalType": 0,
+								"unit": "",
+								"comments": null,
+								"contact": null
+							},
+							"requestedTimeEarly": null,
+							"requestedTime": null,
+							"requestedTimeLate": "07:45:00",
+							"negotiatedTimeEarly": null,
+							"negotiatedTime": null,
+							"negotiatedTimeLate": null,
+							"scheduledTimeEarly": null,
+							"scheduledTime": null,
+							"scheduledTimeLate": null,
+							"comments": "1615 CLIFTON RD",
+							"phone": "4047126000"
+						},
+						"date": "2018-05-13T00:00:00-04:00",
+						"clientID": 5773,
+						"mobilityAidCodes": [],
+						"additionalPassengers": [],
+						"bookingPurposeCode": null,
+						"bookingSubtypeCode": "DEM",
+						"id": 486145,
+						"itineraryID": 0,
+						"callbackPhoneNumber": "404-294-7027",
+						"serviceTypeId": 0,
+						"userDefinedFields": null
+					}
+				],
+				"containsReturnTrip": false,
+				"count": 1
+			}
+		]
+	}
+]
