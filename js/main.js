@@ -96,14 +96,15 @@ function handleMartaData(xhrResponse) {
 	} else {
 		var tripDataArray = xhrResponse
 	}
+	console.log(tripDataArray)
 	var tripToDisplay = tripDataArray.find(trip => {
 		return trip.date === todaysDate
 	})
 	if (tripToDisplay) {
 		if (!testing) {
-			tripToDisplay = tripToDisplay.data.trips[0].trips.find(
-				trip => trip.pickup.estimatedTime > helpers.getCurrentTime()
-			)
+			tripToDisplay = tripToDisplay.data.trips[0].trips.find(trip => {
+				return trip.status.internalCode !== 'CA'
+			})
 		} else {
 			tripToDisplay = tripToDisplay.data.trips[0].trips[0]
 		}
@@ -113,7 +114,6 @@ function handleMartaData(xhrResponse) {
 		}).data.trips[0].trips[0]
 		console.log('no trips today')
 	}
-
 	const pickupLocationData = tripToDisplay.pickup.location
 	const dropoffLocationData = tripToDisplay.dropoff.location
 	var nextTripInfo = {
@@ -123,6 +123,7 @@ function handleMartaData(xhrResponse) {
 		eta: tripToDisplay.pickup.estimatedTime.substring(0, 5),
 		status: '',
 		etaInMinutes: '',
+		actualTime: '',
 		endWindowInMinutes: '',
 		currentTimeInMinutes: helpers.convertTimeToMinutes(
 			helpers.getCurrentTime()
@@ -142,7 +143,8 @@ function handleMartaData(xhrResponse) {
 			dropoffLocationData.postalCode
 		}`
 	}
-
+	nextTripInfo.actualTime =
+		helpers.convertFromMilitaryTime(tripToDisplay.pickup.actualTime) || ''
 	nextTripInfo.etaInMinutes = helpers.convertTimeToMinutes(nextTripInfo.eta)
 	nextTripInfo.endWindowInMinutes = helpers.convertTimeToMinutes(
 		nextTripInfo.endWindow
@@ -158,9 +160,9 @@ function handleMartaData(xhrResponse) {
 		30 - (nextTripInfo.endWindowInMinutes - nextTripInfo.etaInMinutes)
 
 	nextTripInfo.statusColor = getStatusColor(nextTripInfo.delayInMinutes)
-	nextTripInfo.statusDescription = getStatusDescription(
-		nextTripInfo.delayInMinutes
-	)
+	nextTripInfo.statusDescription = nextTripInfo.actualTime
+		? `Picked up at ${nextTripInfo.actualTime}`
+		: getStatusDescription(nextTripInfo.delayInMinutes)
 	nextTripInfo.delayInMinutesDescription = getDelayInMinutesDescription(
 		nextTripInfo.delayInMinutes
 	)
@@ -177,7 +179,7 @@ function retryLogin() {
 const possibleStatuses = [
 	'unscheduled',
 	'scheduled',
-	'inprogress',
+	'inprogress', // pickup.status.internalCode P
 	'complete',
 	'noshow',
 	'cancelled',
@@ -197,7 +199,6 @@ function getStatusColor(delay) {
 }
 
 function getStatusDescription(delay) {
-	console.log(delay)
 	if (delay > 30) {
 		return 'Running late.'
 	} else if (delay < 30 && delay > 0) {

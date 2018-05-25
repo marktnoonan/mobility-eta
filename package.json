@@ -7,10 +7,11 @@
 		"test": "cypress open"
 	},
 	"author": "Mark Noonan",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"babel-core": "^6.26.3",
-		"cypress": "^2.1.0"
+		"cypress": "^2.1.0",
+		"parcel-bundler": "^1.8.1"
 	},
 	"dependencies": {
 		"babel-preset-env": "^1.6.1"

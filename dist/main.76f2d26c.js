@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({4:[function(require,module,exports) {
+})({9:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1181,9 +1181,9 @@ exports.default = {
 		title: '1 Trip'
 	}]
 };
-},{}],8:[function(require,module,exports) {
-module.exports="/bus.b9fd57c7.png";
-},{}],5:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
+module.exports="bus.b9fd57c7.png";
+},{}],10:[function(require,module,exports) {
 'use strict';
 
 var _helpers = require('./helpers');
@@ -1280,13 +1280,14 @@ function handleMartaData(xhrResponse) {
 	} else {
 		var tripDataArray = xhrResponse;
 	}
+	console.log(tripDataArray);
 	var tripToDisplay = tripDataArray.find(function (trip) {
 		return trip.date === todaysDate;
 	});
 	if (tripToDisplay) {
 		if (!testing) {
 			tripToDisplay = tripToDisplay.data.trips[0].trips.find(function (trip) {
-				return trip.pickup.estimatedTime > _helpers2.default.getCurrentTime();
+				return trip.status.internalCode !== 'CA';
 			});
 		} else {
 			tripToDisplay = tripToDisplay.data.trips[0].trips[0];
@@ -1297,7 +1298,6 @@ function handleMartaData(xhrResponse) {
 		}).data.trips[0].trips[0];
 		console.log('no trips today');
 	}
-
 	var pickupLocationData = tripToDisplay.pickup.location;
 	var dropoffLocationData = tripToDisplay.dropoff.location;
 	var nextTripInfo = {
@@ -1307,6 +1307,7 @@ function handleMartaData(xhrResponse) {
 		eta: tripToDisplay.pickup.estimatedTime.substring(0, 5),
 		status: '',
 		etaInMinutes: '',
+		actualTime: '',
 		endWindowInMinutes: '',
 		currentTimeInMinutes: _helpers2.default.convertTimeToMinutes(_helpers2.default.getCurrentTime()),
 		displayEta: '',
@@ -1316,7 +1317,7 @@ function handleMartaData(xhrResponse) {
 		pickupAddress: pickupLocationData.streetNumber + ' ' + pickupLocationData.onStreet + '<br> ' + pickupLocationData.city + ', ' + pickupLocationData.state + ' ' + pickupLocationData.postalCode,
 		dropOffAddress: dropoffLocationData.streetNumber + ' ' + dropoffLocationData.onStreet + '<br> ' + dropoffLocationData.city + ', ' + dropoffLocationData.state + ' ' + dropoffLocationData.postalCode
 	};
-
+	nextTripInfo.actualTime = _helpers2.default.convertFromMilitaryTime(tripToDisplay.pickup.actualTime) || '';
 	nextTripInfo.etaInMinutes = _helpers2.default.convertTimeToMinutes(nextTripInfo.eta);
 	nextTripInfo.endWindowInMinutes = _helpers2.default.convertTimeToMinutes(nextTripInfo.endWindow);
 	nextTripInfo.displayEta = _helpers2.default.convertFromMilitaryTime(nextTripInfo.eta);
@@ -1325,7 +1326,7 @@ function handleMartaData(xhrResponse) {
 	nextTripInfo.delayInMinutes = 30 - (nextTripInfo.endWindowInMinutes - nextTripInfo.etaInMinutes);
 
 	nextTripInfo.statusColor = getStatusColor(nextTripInfo.delayInMinutes);
-	nextTripInfo.statusDescription = getStatusDescription(nextTripInfo.delayInMinutes);
+	nextTripInfo.statusDescription = nextTripInfo.actualTime ? 'Picked up at ' + nextTripInfo.actualTime : getStatusDescription(nextTripInfo.delayInMinutes);
 	nextTripInfo.delayInMinutesDescription = getDelayInMinutesDescription(nextTripInfo.delayInMinutes);
 
 	document.querySelector('#mobility-eta').innerHTML = showTrip(nextTripInfo);
@@ -1337,7 +1338,8 @@ function retryLogin() {
 	addLogInListeners();
 }
 
-var possibleStatuses = ['unscheduled', 'scheduled', 'inprogress', 'complete', 'noshow', 'cancelled', 'willcall', 'imminent'];
+var possibleStatuses = ['unscheduled', 'scheduled', 'inprogress', // pickup.status.internalCode P
+'complete', 'noshow', 'cancelled', 'willcall', 'imminent'];
 
 function getStatusColor(delay) {
 	console.log(delay);
@@ -1351,7 +1353,6 @@ function getStatusColor(delay) {
 }
 
 function getStatusDescription(delay) {
-	console.log(delay);
 	if (delay > 30) {
 		return 'Running late.';
 	} else if (delay < 30 && delay > 0) {
@@ -1419,7 +1420,7 @@ function showSpinner() {
 	var spinner = '<style>@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }</style><div id="spinner" style="width: 50px; height: 50px; -webkit-animation: sweep 1s infinite linear; border-radius: 75px; border-bottom: 5px solid #00bbe5; margin: 50px auto"></div><div style="margin: 20px auto; display: inline-block">Loading your trips...</div>';
 	document.querySelector('#mobility-eta').innerHTML = spinner;
 }
-},{"./helpers":4,"../assets/bus.png":8}],18:[function(require,module,exports) {
+},{"./helpers":9,"../assets/bus.png":17}],21:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1449,7 +1450,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53492' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52162' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -1588,5 +1589,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[18,5])
-//# sourceMappingURL=/main.76f2d26c.map
+},{}]},{},[21,10])
+//# sourceMappingURL=main.76f2d26c.map
