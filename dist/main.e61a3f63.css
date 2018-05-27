@@ -47,9 +47,24 @@ nav:not([class]) header a img, nav[xx] header a img {
 }
 
 .center {
-	text-align: center
+	text-align: center;
 }
 
 #sign-out {
-	display: none
+	display: none;
+}
+.big-eta {
+	display: block;
+	font-size: 4em;
+	margin-bottom: 4px;
+}
+
+.eta-wrapper {
+	margin-top: 64px; 
+	display: inline-block; 
+	font-size: 14px; 
+	line-height: 1.3;
+}
+input:not([type='radio']):not([type='checkbox']):not([type='button']):not([type='submit']):not([class]), input:not([type='radio']):not([type='checkbox']):not([type='button']):not([type='submit'])[xx] {
+    font-size: 16px;
 }

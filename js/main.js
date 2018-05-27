@@ -234,6 +234,7 @@ function getDelayInMinutesDescription(delay) {
 function showTrip(tripDetails) {
 	document.querySelector('section').style.backgroundColor =
 		etaColors[tripDetails.statusColor]
+	window.scrollTo(0,0)
 	return `
     <card full class="booking" id="booking0">
 			<div class="date-and-id" id="date-and-id">
@@ -284,9 +285,10 @@ function showTrip(tripDetails) {
             <br>${tripDetails.displayEta}</span>
 				</div>
 			</div>
-			<span class="eta-wrapper" style="margin-top: 44px; display: inline-block; font-size: 14px; line-height: 1.3">Bus expected at
-        <b>${tripDetails.displayEta}</b>,
-        <br>${tripDetails.delayInMinutesDescription}</span>
+			<span class="eta-wrapper">
+			Bus expected at
+        <b class="big-eta">${tripDetails.displayEta}</b>
+        ${tripDetails.delayInMinutesDescription}</span>
 			<div class="ready-time-gage" style="text-align: left">
 			<br>
 				<div class="pickup">
