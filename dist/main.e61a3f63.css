@@ -49,3 +49,7 @@ nav:not([class]) header a img, nav[xx] header a img {
 .center {
 	text-align: center
 }
+
+#sign-out {
+	display: none
+}

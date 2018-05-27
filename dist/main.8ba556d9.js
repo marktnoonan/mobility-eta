@@ -1298,6 +1298,7 @@ function getTrips(username, password) {
 }
 
 function handleMartaData(xhrResponse) {
+	showSignOutLink();
 	console.log(xhrResponse);
 	if (!testing) {
 		var tripDataString = JSON.parse(xhrResponse);
@@ -1445,7 +1446,11 @@ function showSpinner() {
 	var spinner = '<style>@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }</style><div id="spinner" style="width: 50px; height: 50px; -webkit-animation: sweep 1s infinite linear; border-radius: 75px; border-bottom: 5px solid #00bbe5; margin: 50px auto"></div><div style="margin: 20px auto; display: inline-block">Loading your trips...</div>';
 	document.querySelector('#mobility-eta').innerHTML = spinner;
 }
-},{"./helpers":9,"../assets/bus.png":17}],28:[function(require,module,exports) {
+
+function showSignOutLink() {
+	document.querySelector("#sign-out").style.display = "block";
+}
+},{"./helpers":9,"../assets/bus.png":17}],33:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1615,5 +1620,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[28,10], null)
+},{}]},{},[33,10], null)
 //# sourceMappingURL=/main.8ba556d9.map

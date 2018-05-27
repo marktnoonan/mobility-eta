@@ -89,6 +89,7 @@ function getTrips(username, password) {
 }
 
 function handleMartaData(xhrResponse) {
+	showSignOutLink()
 	console.log(xhrResponse)
 	if (!testing) {
 		var tripDataString = JSON.parse(xhrResponse)
@@ -333,4 +334,8 @@ function showSpinner() {
 	var spinner =
 		'<style>@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }</style><div id="spinner" style="width: 50px; height: 50px; -webkit-animation: sweep 1s infinite linear; border-radius: 75px; border-bottom: 5px solid #00bbe5; margin: 50px auto"></div><div style="margin: 20px auto; display: inline-block">Loading your trips...</div>'
 	document.querySelector('#mobility-eta').innerHTML = spinner
+}
+
+function showSignOutLink() {
+	document.querySelector("#sign-out").style.display = "block"
 }
