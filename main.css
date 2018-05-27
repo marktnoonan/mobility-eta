@@ -47,9 +47,43 @@ nav:not([class]) header a img, nav[xx] header a img {
 }
 
 .center {
-	text-align: center
+	text-align: center;
 }
 
 #sign-out {
-	display: none
+	display: none;
+}
+.big-eta {
+	display: block;
+	font-size: 4em;
+	margin-bottom: 4px;
+}
+
+.eta-wrapper {
+	margin-top: 64px; 
+	display: inline-block; 
+	font-size: 14px; 
+	line-height: 1.3;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+	/*
+	this is a hack to fix mobile zoom issues
+	*/
+  font-size: 16px;
 }
