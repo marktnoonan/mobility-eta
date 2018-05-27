@@ -44,9 +44,15 @@ npx cypress open
 ```
 to open Cypress, then run the test "app_spec.js" which will verify that the homepage loads, test user is able to log in, and the trip information is displayed. The test data is stored locally in "helpers" and no longer comes from scrape.php.
 
+## Continuous Deployment
+
+The project is live at [https://vigilant-saha-304915.netlify.com/](https://vigilant-saha-304915.netlify.com/) and is **updated every time there is a change on the master branch**.
+
 ## Building for Production
+
+If you need to create a production build, run
 
 ```
 parcel build index.html
 ```
-This will update the /dist folder with minified files and assets.
+This will update the /dist folder with minified files and assets. This is only needed if you want to deploy somewhere other than Netlify, since a new Netlify build is created automatically when changes are pushed to Master.
