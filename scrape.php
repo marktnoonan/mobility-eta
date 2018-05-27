@@ -3,6 +3,7 @@ ini_set('display_errors', 0);
  header("Access-Control-Allow-Origin: *");
 // logging in with cURL based on http://thisinterestsme.com/php-login-to-website-with-curl/
 
+
 date_default_timezone_set('America/New_York');
 // if UN and PW are set, and not equal to "test" or empty strings.
 if (isset($_POST['providedUsername']) && isset($_POST['providedPassword']) && $_POST['providedUsername'] !== '' && $_POST['providedPassword'] !== '' && strtolower($_POST['providedUsername']) !== 'test' && $_POST['providedPassword'] !== 'test') {
@@ -16,6 +17,11 @@ exit("username or password is missing!");
 
 function martaLogin()
 {
+$month = date("n");
+ if (isset($_POST['month'])){
+     $month = $_POST['month'];
+ } 
+
     define('USERNAME', $_POST['providedUsername']);
     define('PASSWORD', $_POST['providedPassword']);
 
@@ -30,6 +36,10 @@ function martaLogin()
 
     //Login action URL. Sometimes, this is the same URL as the login form.
     define('LOGIN_ACTION_URL', 'https://martapp.mvtransit.com/Account/Login');
+
+    define('GET_TRIPS_URL', 'https://martapp.mvtransit.com/Trips/GetCalendarData?year=2018&month='.$month);
+
+
 
     //An associative array that represents the required form fields.
     //You will need to change the keys / index names to match the name of the form
@@ -83,7 +93,7 @@ function martaLogin()
     }
 
   //We should be logged in by now. Let's attempt to access a password protected page
-    curl_setopt($curl, CURLOPT_URL, 'https://martapp.mvtransit.com/Trips/GetCalendarData?year=2018&month='.date("n"));
+    curl_setopt($curl, CURLOPT_URL, GET_TRIPS_URL);
 
     //Use the same cookie file.
     curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);

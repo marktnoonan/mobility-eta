@@ -1,6 +1,5 @@
 import helpers from './helpers'
 import busImageURL from '../assets/bus.png'
-
 var testing = false
 
 var etaColors = {
@@ -15,10 +14,10 @@ var bookings = []
 var clientName = ''
 var loginDetails = []
 var todaysDate = ''
-;(function init() {
-	addLogInListeners()
-})()
+var currentMonth = new Date().getMonth() + 1;
+console.log(currentMonth)
 
+addLogInListeners()
 function showInfo(username, password) {
 	testing = username === 'test'
 	document.querySelector('#intro-text').innerHTML =
@@ -39,22 +38,24 @@ function addTryAgainScreen() {
 }
 
 function addLogInListeners() {
-	var usernameInput = document.querySelector('input[name=providedUsername]')
-	var passwordInput = document.querySelector('input[name=providedPassword]')
-
-	document.querySelector('#login').addEventListener('click', function() {
-		var username = usernameInput.value
-		var password = passwordInput.value
-		showInfo(username, password)
-	})
-
-	document.querySelector('#pw').addEventListener('keyup', function(event) {
-		if (event.keyCode == 13) {
+	if (document.querySelector('#login')){
+		var usernameInput = document.querySelector('input[name=providedUsername]')
+		var passwordInput = document.querySelector('input[name=providedPassword]')
+	
+		document.querySelector('#login').addEventListener('click', function() {
 			var username = usernameInput.value
 			var password = passwordInput.value
 			showInfo(username, password)
-		}
-	})
+		})
+	
+		document.querySelector('#pw').addEventListener('keyup', function(event) {
+			if (event.keyCode == 13) {
+				var username = usernameInput.value
+				var password = passwordInput.value
+				showInfo(username, password)
+			}
+		})
+	}
 }
 
 function addRefreshListener() {
@@ -64,7 +65,7 @@ function addRefreshListener() {
 	})
 }
 
-function getTrips(username, password) {
+function getTrips(username, password, month = currentMonth) {
 	return new Promise(function(resolve, reject) {
 		if (testing) {
 			resolve(handleMartaData(helpers.testTrips))
@@ -83,7 +84,7 @@ function getTrips(username, password) {
 					reject(Error('Request failed, status was ' + xhr.statusText))
 				}
 			}
-			xhr.send('providedUsername=' + username + '&providedPassword=' + password)
+			xhr.send('providedUsername=' + username + '&providedPassword=' + password + '&month=' + month)
 		}
 	})
 }
@@ -110,9 +111,16 @@ function handleMartaData(xhrResponse) {
 			tripToDisplay = tripToDisplay.data.trips[0].trips[0]
 		}
 	} else {
-		tripToDisplay = tripDataArray.find(trip => {
-			return trip.date > todaysDate
-		}).data.trips[0].trips[0]
+		try {
+			tripToDisplay = tripDataArray.find(trip => {
+				return trip.date > todaysDate
+			}).data.trips[0].trips[0]	
+		} catch(error) {
+			console.log('no trips this month')
+			getTrips(loginDetails[0],loginDetails[1],currentMonth + 1)
+
+			return
+		}
 		console.log('no trips today')
 	}
 	const pickupLocationData = tripToDisplay.pickup.location
@@ -339,3 +347,4 @@ function showSpinner() {
 function showSignOutLink() {
 	document.querySelector("#sign-out").style.display = "block"
 }
+console.log(window)

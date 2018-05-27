@@ -1234,10 +1234,11 @@ var martaResponse = {};
 var bookings = [];
 var clientName = '';
 var loginDetails = [];
-var todaysDate = '';(function init() {
-	addLogInListeners();
-})();
+var todaysDate = '';
+var currentMonth = new Date().getMonth() + 1;
+console.log(currentMonth);
 
+addLogInListeners();
 function showInfo(username, password) {
 	testing = username === 'test';
 	document.querySelector('#intro-text').innerHTML = '<h3 txt="c"> Your Next Trip </h3>';
@@ -1252,22 +1253,24 @@ function addTryAgainScreen() {
 }
 
 function addLogInListeners() {
-	var usernameInput = document.querySelector('input[name=providedUsername]');
-	var passwordInput = document.querySelector('input[name=providedPassword]');
+	if (document.querySelector('#login')) {
+		var usernameInput = document.querySelector('input[name=providedUsername]');
+		var passwordInput = document.querySelector('input[name=providedPassword]');
 
-	document.querySelector('#login').addEventListener('click', function () {
-		var username = usernameInput.value;
-		var password = passwordInput.value;
-		showInfo(username, password);
-	});
-
-	document.querySelector('#pw').addEventListener('keyup', function (event) {
-		if (event.keyCode == 13) {
+		document.querySelector('#login').addEventListener('click', function () {
 			var username = usernameInput.value;
 			var password = passwordInput.value;
 			showInfo(username, password);
-		}
-	});
+		});
+
+		document.querySelector('#pw').addEventListener('keyup', function (event) {
+			if (event.keyCode == 13) {
+				var username = usernameInput.value;
+				var password = passwordInput.value;
+				showInfo(username, password);
+			}
+		});
+	}
 }
 
 function addRefreshListener() {
@@ -1278,6 +1281,8 @@ function addRefreshListener() {
 }
 
 function getTrips(username, password) {
+	var month = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : currentMonth;
+
 	return new Promise(function (resolve, reject) {
 		if (testing) {
 			resolve(handleMartaData(_helpers2.default.testTrips));
@@ -1292,7 +1297,7 @@ function getTrips(username, password) {
 					reject(Error('Request failed, status was ' + xhr.statusText));
 				}
 			};
-			xhr.send('providedUsername=' + username + '&providedPassword=' + password);
+			xhr.send('providedUsername=' + username + '&providedPassword=' + password + '&month=' + month);
 		}
 	});
 }
@@ -1319,9 +1324,16 @@ function handleMartaData(xhrResponse) {
 			tripToDisplay = tripToDisplay.data.trips[0].trips[0];
 		}
 	} else {
-		tripToDisplay = tripDataArray.find(function (trip) {
-			return trip.date > todaysDate;
-		}).data.trips[0].trips[0];
+		try {
+			tripToDisplay = tripDataArray.find(function (trip) {
+				return trip.date > todaysDate;
+			}).data.trips[0].trips[0];
+		} catch (error) {
+			console.log('no trips this month');
+			getTrips(loginDetails[0], loginDetails[1], currentMonth + 1);
+
+			return;
+		}
 		console.log('no trips today');
 	}
 	var pickupLocationData = tripToDisplay.pickup.location;
@@ -1450,7 +1462,8 @@ function showSpinner() {
 function showSignOutLink() {
 	document.querySelector("#sign-out").style.display = "block";
 }
-},{"./helpers":9,"../assets/bus.png":17}],33:[function(require,module,exports) {
+console.log(window);
+},{"./helpers":9,"../assets/bus.png":17}],36:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1620,5 +1633,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[33,10], null)
+},{}]},{},[36,10], null)
 //# sourceMappingURL=/main.8ba556d9.map
