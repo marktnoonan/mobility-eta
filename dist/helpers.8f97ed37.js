@@ -131,17 +131,21 @@ exports.default = {
 		return date.getHours() + ':' + date.getMinutes();
 	},
 	convertFromMilitaryTime: function convertFromMilitaryTime(time) {
-		var _time$split3 = time.split(':'),
-		    _time$split4 = _slicedToArray(_time$split3, 2),
-		    hours = _time$split4[0],
-		    minutes = _time$split4[1];
+		if (time !== null) {
+			var _time$split3 = time.split(':'),
+			    _time$split4 = _slicedToArray(_time$split3, 2),
+			    hours = _time$split4[0],
+			    minutes = _time$split4[1];
 
-		var standardHours = hours > 12 ? hours % 12 : hours;
-		var period = hours < 12 ? 'AM' : 'PM';
-		if (hours < 12 && standardHours.charAt(0) === '0') {
-			standardHours = standardHours.substring(1);
+			var standardHours = hours > 12 ? hours % 12 : hours;
+			var period = hours < 12 ? 'AM' : 'PM';
+			if (hours < 12 && standardHours.charAt(0) === '0') {
+				standardHours = standardHours.substring(1);
+			}
+			return standardHours + ':' + minutes + ' ' + period;
+		} else {
+			return null;
 		}
-		return standardHours + ':' + minutes + ' ' + period;
 	},
 
 
@@ -1202,7 +1206,7 @@ exports.default = {
 		title: '1 Trip'
 	}]
 };
-},{}],21:[function(require,module,exports) {
+},{}],28:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1372,5 +1376,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[21,9], null)
+},{}]},{},[28,9], null)
 //# sourceMappingURL=/helpers.8f97ed37.map

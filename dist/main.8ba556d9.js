@@ -131,17 +131,21 @@ exports.default = {
 		return date.getHours() + ':' + date.getMinutes();
 	},
 	convertFromMilitaryTime: function convertFromMilitaryTime(time) {
-		var _time$split3 = time.split(':'),
-		    _time$split4 = _slicedToArray(_time$split3, 2),
-		    hours = _time$split4[0],
-		    minutes = _time$split4[1];
+		if (time !== null) {
+			var _time$split3 = time.split(':'),
+			    _time$split4 = _slicedToArray(_time$split3, 2),
+			    hours = _time$split4[0],
+			    minutes = _time$split4[1];
 
-		var standardHours = hours > 12 ? hours % 12 : hours;
-		var period = hours < 12 ? 'AM' : 'PM';
-		if (hours < 12 && standardHours.charAt(0) === '0') {
-			standardHours = standardHours.substring(1);
+			var standardHours = hours > 12 ? hours % 12 : hours;
+			var period = hours < 12 ? 'AM' : 'PM';
+			if (hours < 12 && standardHours.charAt(0) === '0') {
+				standardHours = standardHours.substring(1);
+			}
+			return standardHours + ':' + minutes + ' ' + period;
+		} else {
+			return null;
 		}
-		return standardHours + ':' + minutes + ' ' + period;
 	},
 
 
@@ -1441,7 +1445,7 @@ function showSpinner() {
 	var spinner = '<style>@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }</style><div id="spinner" style="width: 50px; height: 50px; -webkit-animation: sweep 1s infinite linear; border-radius: 75px; border-bottom: 5px solid #00bbe5; margin: 50px auto"></div><div style="margin: 20px auto; display: inline-block">Loading your trips...</div>';
 	document.querySelector('#mobility-eta').innerHTML = spinner;
 }
-},{"./helpers":9,"../assets/bus.png":17}],21:[function(require,module,exports) {
+},{"./helpers":9,"../assets/bus.png":17}],28:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1611,5 +1615,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[21,10], null)
+},{}]},{},[28,10], null)
 //# sourceMappingURL=/main.8ba556d9.map

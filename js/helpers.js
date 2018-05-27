@@ -23,13 +23,17 @@ export default {
 	},
 
 	convertFromMilitaryTime(time) {
-		const [hours, minutes] = time.split(':')
-		let standardHours = hours > 12 ? hours % 12 : hours
-		let period = hours < 12 ? 'AM' : 'PM'
-		if (hours < 12 && standardHours.charAt(0) === '0') {
-			standardHours = standardHours.substring(1)
+		if (time !== null){
+			const [hours, minutes] = time.split(':')
+			let standardHours = hours > 12 ? hours % 12 : hours
+			let period = hours < 12 ? 'AM' : 'PM'
+			if (hours < 12 && standardHours.charAt(0) === '0') {
+				standardHours = standardHours.substring(1)
+			}
+			return `${standardHours}:${minutes} ${period}`	
+		} else {
+			return null
 		}
-		return `${standardHours}:${minutes} ${period}`
 	},
 
 	dateHelper: {
