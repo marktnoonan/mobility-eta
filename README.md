@@ -14,6 +14,8 @@ These instructions will get you a copy of the project up and running on your loc
 npm install -g parcel-bundler
 ```
 
+But it is also included as a dependency in this project.
+
 ### Installing
 
 Clone this repo and run
@@ -34,7 +36,7 @@ Once build is complete, navigate to "http://localhost:1234/". You should see a l
 
 ## Running the tests
 
-This project will use [Cypress](https://www.cypress.io/) for E2E testing. Run 
+This project uses [Cypress](https://www.cypress.io/) for testing. Run 
 ```
 npm test
 ```
@@ -43,6 +45,12 @@ or
 npx cypress open
 ```
 to open Cypress, then run the test "app_spec.js" which will verify that the homepage loads, test user is able to log in, and the trip information is displayed. The test data is stored locally in "helpers" and no longer comes from scrape.php.
+
+Cypress can also run headless tests, with this command:
+```
+./node_modules/.bin/cypress run
+```
+This will run all the tests in the command line.
 
 ## Continuous Deployment
 
