@@ -19,7 +19,7 @@ console.log(currentMonth)
 
 addLogInListeners()
 function showInfo(username, password) {
-	testing = username === 'test'
+	testing = username.toLowerCase() === 'test'
 	document.querySelector('#intro-text').innerHTML =
 		'<h3 txt="c"> Your Next Trip </h3>'
 	todaysDate = helpers.today(username)

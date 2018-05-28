@@ -1240,7 +1240,7 @@ console.log(currentMonth);
 
 addLogInListeners();
 function showInfo(username, password) {
-	testing = username === 'test';
+	testing = username.toLowerCase() === 'test';
 	document.querySelector('#intro-text').innerHTML = '<h3 txt="c"> Your Next Trip </h3>';
 	todaysDate = _helpers2.default.today(username);
 	showSpinner();
@@ -1464,7 +1464,7 @@ function showSignOutLink() {
 	document.querySelector("#sign-out").style.display = "block";
 }
 console.log(window);
-},{"./helpers":9,"../assets/bus.png":17}],36:[function(require,module,exports) {
+},{"./helpers":9,"../assets/bus.png":17}],37:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1634,5 +1634,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[36,10], null)
+},{}]},{},[37,10], null)
 //# sourceMappingURL=/main.8ba556d9.map
